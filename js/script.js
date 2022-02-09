@@ -1,12 +1,19 @@
 const numMin = 0
 const numMax = 100
-const makeNum = 88
 let chance = 10;
 
-function numberBot(numMin, numMax, makeNum, chance){
+// функция задвания ранодомного числа принимающая два парметра промежуток чисел
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+}
+
+function numberBot(numMin, numMax, chance){
+  const makeNum = getRandomIntInclusive(numMin,numMax)
 
   function numCheck(){
-
+    console.log("Загаданное число " + makeNum);
 
     if (chance == 0) {
       if(confirm("Попытки закончились, хотите сыграть еще?")) chance = 10
@@ -20,35 +27,35 @@ function numberBot(numMin, numMax, makeNum, chance){
     let number = prompt("Выберите число от 1 до 100");
 
     if (number == null) {
-      return console.log("Игра окончена" );
+      return alert("Игра окончена" );
     } else {
 
       chance--;
 
       if(!isNumber(number) || number == ""){
-        console.log("Введи число!, осталось " + chance + " попыток");
+        alert("Введи число!, осталось " + chance + " попыток");
         numCheck()
       }
 
       else if (number < numMin || number > numMax) {
-        console.log("Вы ввели число за пределами заданных чисел, осталось " + chance + " попыток");
+        alert("Вы ввели число за пределами заданных чисел, осталось " + chance + " попыток");
         numCheck()
       }
 
       else if (number > makeNum){
-        console.log("Загаданное число меньше, осталось " + chance + " попыток");
+        alert("Загаданное число меньше, осталось " + chance + " попыток");
         numCheck()
       }
 
       else if (number < makeNum){
-        console.log("Загаданное число больше, осталось " + chance + " попыток");
+        alert("Загаданное число больше, осталось " + chance + " попыток");
         numCheck()
       }
 
       else if (number == makeNum){
-              if(confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?")) chance = 10
+              if(confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?")) chance = 10,numberBot(numMin, numMax, chance);
           else {
-            return console.log("Игра окончена" );
+            return alert("Игра окончена" );
           }
       }
     }
@@ -61,4 +68,4 @@ function numberBot(numMin, numMax, makeNum, chance){
   numCheck()
 }
 
-numberBot(numMin, numMax, makeNum, chance)
+numberBot(numMin, numMax, chance)
