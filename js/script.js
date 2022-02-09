@@ -1,8 +1,17 @@
 const numMin = 0
 const numMax = 100
-const makeNum = 88
 
-function numberBot(numMin, numMax, makeNum){
+// функция задвания ранодомного числа принимающая два парметра промежуток чисел
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+}
+
+
+function numberBot(numMin, numMax){
+  const makeNum = getRandomIntInclusive(numMin,numMax)
+  console.log(makeNum);
 
   function numCheck(){
 
@@ -10,11 +19,12 @@ function numberBot(numMin, numMax, makeNum){
 
     if (number == null) {
       return alert("Игра окончена" );
-    } else if(number == ""){
-      alert("Введи число!");
-      numCheck()
     } else {
-      alert(" Вы ввели: " + number);
+
+      if(!isNumber(number) || number == ""){
+        alert("Введи число!");
+        numCheck()
+      }
 
       if (number < numMin || number > numMax)
       {
@@ -35,11 +45,6 @@ function numberBot(numMin, numMax, makeNum){
       if (number == makeNum){
         return alert("Поздравляю, Вы угадали!!!");
       }
-
-      if(!isNumber(number) || number == ""){
-        alert("Введи число!");
-        numCheck()
-      }
     }
   }
 
@@ -50,4 +55,5 @@ function numberBot(numMin, numMax, makeNum){
   numCheck()
 }
 
-numberBot(numMin, numMax, makeNum)
+numberBot(numMin, numMax)
+
